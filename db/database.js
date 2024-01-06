@@ -28,6 +28,16 @@ export const addNote = async (noteVal) => {
     // return noteRow.insertId;
 }
 
+export const updateNote = async (id, noteVal) => {
+    const [noteRow] = await pool.query("UPDATE notes SET note=? WHERE id=?", [noteVal, id])
+    return noteRow.affectedRows;
+}
+
+export const deleteNote = async (id) => {
+    const [noteRow] = await pool.query("DELETE FROM notes WHERE id = ?", [id])
+    return noteRow.affectedRows;
+}
+
 // console.log("Added Row is: ", await addNote("Hey There Node 2"));
 // console.log(await getAllNotes());
 // console.log(await getNote(1));
