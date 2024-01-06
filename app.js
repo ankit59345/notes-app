@@ -18,6 +18,6 @@ app.use((err, req, res, next) => {
 })
 
 
-const port = 8080;
+const port = process.env.port;
 
 app.listen(port, () => console.log(`Listening to port: ${port}`))
