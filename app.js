@@ -5,7 +5,11 @@ import {readFileSync} from "fs"
 const app = express();
 app.use(express.json())
 
-app.use('/api/notes', notesRouter)
+app.use('/api/v1/notes', notesRouter)
+
+app.all('*', (req, res) => {
+    return res.status(404).json({success: false, msg: "OOPs, The Route you are trying to access does not exist"})
+})
 
 app.use((err, req, res, next) => {
     console.log(err.stack)
