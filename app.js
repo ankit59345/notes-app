@@ -1,5 +1,5 @@
 import express from "express";
-import notesRouter from "./routes/notes.js"
+import notesRouter from "./src/routes/notes.js"
 import {readFileSync} from "fs"
 
 const app = express();

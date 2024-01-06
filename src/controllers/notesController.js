@@ -1,4 +1,4 @@
-import {addNote, getAllNotes, getNote, updateNote, deleteNote} from "../db/database.js"
+import {addNote, getAllNotes, getNote, updateNote, deleteNote} from "../service/notesService.js"
 
 export const getNotes = async (req, res, next) => {
     const notes = await getAllNotes();

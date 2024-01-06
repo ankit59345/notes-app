@@ -1,14 +1,4 @@
-import mysql from "mysql2";
-import dotenv from "dotenv";
-dotenv.config();
-
-export const pool = mysql.createPool({
-    host: process.env.MYSQL_HOST,
-    user: process.env.MYSQL_USER,
-    password: process.env.MYSQL_PASSWORD,
-    database: process.env.MYSQL_DATABASE
-}).promise();
-
+import {pool} from "../db/database.js"
 
 export const getAllNotes = async () => {
     const [allNotes] = await pool.query("SELECT * FROM notes")
@@ -37,7 +27,3 @@ export const deleteNote = async (id) => {
     const [noteRow] = await pool.query("DELETE FROM notes WHERE id = ?", [id])
     return noteRow.affectedRows;
 }
-
-// console.log("Added Row is: ", await addNote("Hey There Node 2"));
-// console.log(await getAllNotes());
-// console.log(await getNote(1));
