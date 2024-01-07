@@ -13,7 +13,6 @@ const authenticateUser = (req, res, next) => {
         }
         token = token.split("Bearer ")[1];
         const payload = isTokenValid(token);
-        console.log(payload);
         if( !payload ) throw new CustomApiError.UnauthenticatedError("Please Log In to Continue")
         next();
     }catch(err) {
