@@ -1,6 +1,6 @@
-import {check, validationResult} from 'express-validator';
+const {check, validationResult} = require('express-validator');
 
-export const validateNotes = [
+const validateNotes = [
   check('id')
     .trim()
     .escape()
@@ -13,14 +13,13 @@ export const validateNotes = [
     .bail(),
   (req, res, next) => {
     const errors = validationResult(req);
-    console.log(errors);
     if (!errors.isEmpty())
       return res.status(422).json({success:false, errors: errors.array()});
     next();
   },
 ];
 
-export const validateCreateNotes = [
+const validateCreateNotes = [
     check('note')
     .trim()
     .escape()
@@ -33,9 +32,13 @@ export const validateCreateNotes = [
     .bail(),
   (req, res, next) => {
     const errors = validationResult(req);
-    console.log(errors);
     if (!errors.isEmpty())
       return res.status(422).json({success:false, errors: errors.array()});
     next();
   },
 ];
+
+module.exports = {
+  validateNotes,
+  validateCreateNotes
+}

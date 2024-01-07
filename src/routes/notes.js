@@ -1,10 +1,10 @@
-import express from "express";
-import {asyncWrapper} from '../middlewares/asyncWrapper.js';
-import {getNotes, getNoteById, createNote, updateExistingNote, deleteExistingNote} from '../controllers/notesController.js'
-import {validateNotes, validateCreateNotes} from '../middlewares/validators/notesValidator.js';
+const express = require("express");
+const {getNotes, getNoteById, createNote, updateExistingNote, deleteExistingNote} = require('../controllers/notesController.js');
+const {validateNotes, validateCreateNotes} = require('../middlewares/validators/notesValidator.js');
 const notesRouter = express.Router();
+require("express-async-errors")
 
-notesRouter.route('/').get(asyncWrapper(getNotes)).post(validateCreateNotes, asyncWrapper(createNote));
-notesRouter.route('/:id').get(validateNotes, asyncWrapper(getNoteById)).patch([validateNotes, validateCreateNotes], asyncWrapper(updateExistingNote)).delete(validateNotes, asyncWrapper(deleteExistingNote));
+notesRouter.route('/').get(getNotes).post(validateCreateNotes, createNote);
+notesRouter.route('/:id').get(validateNotes, getNoteById).patch([validateNotes, validateCreateNotes], updateExistingNote).delete(validateNotes, deleteExistingNote);
 
-export default notesRouter
+module.exports = notesRouter

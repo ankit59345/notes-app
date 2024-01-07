@@ -1,6 +1,6 @@
-import express from "express";
-import notesRouter from "./src/routes/notes.js"
-import {readFileSync} from "fs"
+const express = require("express");
+const notesRouter = require("./src/routes/notes.js");
+const {readFileSync} = require("fs");
 
 const app = express();
 app.use(express.json())
@@ -18,6 +18,6 @@ app.use((err, req, res, next) => {
 })
 
 
-const port = process.env.port;
+const port = process.env.PORT || 8080;
 
 app.listen(port, () => console.log(`Listening to port: ${port}`))

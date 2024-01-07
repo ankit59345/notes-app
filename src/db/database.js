@@ -1,14 +1,12 @@
-import mysql from "mysql2";
-import dotenv from "dotenv";
+const mysql = require("mysql2/promise");
+const dotenv = require("dotenv");
 dotenv.config();
 
-export const pool = mysql.createPool({
+const pool = mysql.createPool({
     host: process.env.MYSQL_HOST,
     user: process.env.MYSQL_USER,
     password: process.env.MYSQL_PASSWORD,
     database: process.env.MYSQL_DATABASE
-}).promise();
+});
 
-// console.log("Added Row is: ", await addNote("Hey There Node 2"));
-// console.log(await getAllNotes());
-// console.log(await getNote(1));
+module.exports = pool
