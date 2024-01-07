@@ -1,4 +1,5 @@
 const {addNote, getAllNotes, getNote, updateNote, deleteNote} = require("../service/notesService.js")
+const CustomApiError = require('../errors')
 
 const getNotes = async (req, res, next) => {
     const notes = await getAllNotes();

@@ -1,6 +1,6 @@
 const express = require("express");
+const {validateNotes, validateCreateNotes} = require('../validators/notesValidator.js');
 const {getNotes, getNoteById, createNote, updateExistingNote, deleteExistingNote} = require('../controllers/notesController.js');
-const {validateNotes, validateCreateNotes} = require('../middlewares/validators/notesValidator.js');
 const notesRouter = express.Router();
 require("express-async-errors")
 
