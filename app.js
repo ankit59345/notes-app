@@ -10,11 +10,6 @@ app.use(express.json())
 
 app.use(errorHandlerMiddleware)
 
-app.use((err, req, res, next) => {
-    console.log(err.stack)
-    const errHtml = readFileSync('./public/500.html', 'utf8')
-    res.status(500).send(errHtml)
-})
 app.use('/api/v1/notes', [authenticateUser, notesRouter])
 
 app.use('/api/v1/user', userRouter)
@@ -26,6 +21,7 @@ app.all('*', (req, res) => {
 })
 
 
+app.use(errorHandlerMiddleware)
 
 
 
