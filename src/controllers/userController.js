@@ -10,7 +10,7 @@ const registerUser = async (req, res, next) => {
 const loginUser = async (req, res, next) => {
     const {userName ,password} = req.body;
     const token = await checkLogin(userName, password);
-    return res.status(201).json({success: true, msg: "User Logged IN Successfully", bearerToken: token})
+    return res.status(200).json({success: true, msg: "User Logged IN Successfully", bearerToken: token})
 }
 
 module.exports = {
