@@ -27,7 +27,7 @@ const uploadProfilePicture = async (req, res) => {
         if (err) throw err
         console.log('Successfully renamed - AKA moved!')
       })
-    const docSaved = saveUserDocument(req.user, file.path.replace("/"+file.filename, ''), file.filename, 'PROFILE_IMAGE');
+    const docSaved = await saveUserDocument(req.user, file.path.replace("/"+file.filename, ''), file.filename, 'PROFILE_IMAGE');
     if(!docSaved) CustomApiError.CustomApiError("An unknown error occured")
 
     return res.status(200).json({success: true})

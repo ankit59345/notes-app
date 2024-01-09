@@ -38,9 +38,9 @@ const checkLogin = async (userName, password) => {
 
 const saveUserDocument = async (user, path, filename, documentType) => {
 
-    await pool.query("INSERT INTO documents (user_id, document_type, path, file_name) VALUES (?, ?, ?, ?) ON DUPLICATE KEY UPDATE path=VALUES(path), file_name=VALUES(file_name)", [user.id, documentType, path, filename])
+    const [updatedRow] = await pool.query("INSERT INTO document (user_id, document_type, path, file_name) VALUES (?, ?, ?, ?) ON DUPLICATE KEY UPDATE path=VALUES(path), file_name=VALUES(file_name)", [user.id, documentType, path, filename])
     
-    return true;
+    return updatedRow;
 }
 
 module.exports = {
