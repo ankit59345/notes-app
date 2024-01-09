@@ -12,3 +12,14 @@ CREATE TABLE users(
     password VARCHAR(255) NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL
 );
+
+DROP TABLE IF EXISTS documents;
+CREATE TABLE documents (
+    id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    user_id INT NOT NULL,
+    document_type ENUM('PROFILE_IMAGE'),
+    path VARCHAR(255) NOT NULL,
+    file_name VARCHAR(100) NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES users(id),
+    CONSTRAINT unique (user_id, document_type)
+);
