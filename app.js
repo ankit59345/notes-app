@@ -28,6 +28,7 @@ app.use(rateLimiter({
         });
     },
 }));
+app.use(express.static('./uploads/user'))  
 
 
 // Routes

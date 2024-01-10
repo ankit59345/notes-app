@@ -1,4 +1,4 @@
-const {addUser, checkLogin, saveUserDocument} = require("../service/userService.js")
+const {addUser, checkLogin, saveUserDocument, getUserDocument} = require("../service/userService.js")
 const CustomApiError = require('../errors')
 const fs = require('fs');
 const path = require('path');
@@ -23,18 +23,28 @@ const uploadProfilePicture = async (req, res) => {
     if (!fs.existsSync(finalDir)){
         fs.mkdirSync(finalDir, {recursive: true}, err => {});
     }
-    fs.rename(file.path, `uploads/user/${req.user.id}/${file.filename}`, function (err) {
+    await fs.rename(file.path, `uploads/user/${req.user.id}/${file.filename}`, function (err) {
         if (err) throw err
         console.log('Successfully renamed - AKA moved!')
-      })
-    const docSaved = await saveUserDocument(req.user, file.path.replace("/"+file.filename, ''), file.filename, 'PROFILE_IMAGE');
-    if(!docSaved) CustomApiError.CustomApiError("An unknown error occured")
+    })
+    const docSaved = await saveUserDocument(req.user, `uploads/user/${req.user.id}/`, file.filename, 'PROFILE_IMAGE');
+    if(!docSaved) throw newCustomApiError.CustomApiError("An unknown error occured", 500)
 
     return res.status(200).json({success: true})
+}
+
+const getProfilePicture = async (req, res) => {
+    const userProfilePicture = await getUserDocument(req.user, 'PROFILE_IMAGE')
+    if(!userProfilePicture.path || !userProfilePicture.file_name) throw new CustomApiError.CustomApiError("An unknown error occured", 500)
+
+    return res.status(200).json({success: true, userDocument: {
+        url: `http://127.0.0.1:8080/${userProfilePicture.path.replace('uploads/user', '')}${userProfilePicture.file_name}`
+    }})
 }
 
 module.exports = {
     registerUser,
     loginUser,
-    uploadProfilePicture
+    uploadProfilePicture,
+    getProfilePicture
 }

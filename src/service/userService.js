@@ -43,8 +43,16 @@ const saveUserDocument = async (user, path, filename, documentType) => {
     return updatedRow;
 }
 
+const getUserDocument = async (user, documentType) => {
+
+    const [[userDocument]] = await pool.query("SELECT * FROM documents WHERE user_id=? AND document_type=?", [user.id, documentType])
+    
+    return userDocument;
+}
+
 module.exports = {
     addUser,
     checkLogin,
-    saveUserDocument
+    saveUserDocument,
+    getUserDocument
 }
