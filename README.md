@@ -1,4 +1,4 @@
-# notes-app
+# NOTES APP
 Simple Notes app using Node, Express
 
 ## Config
@@ -8,8 +8,8 @@ Simple Notes app using Node, Express
 
 ## Features
 
-### Has user authentication using user apis
-### Supports Profile Picture Upload in Users API
+### --Has user authentication using user apis
+### --Supports Profile Picture Upload in Users API
 -- ADD/UPDATE/DELTE/GET Notes based on logged in user  
 -- CREATE USER / USER LOGIN  
 -- UPLOAD PROFILE PICTURE / GET PROFILE PICTURE  
